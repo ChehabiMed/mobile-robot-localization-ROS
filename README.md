@@ -1,6 +1,9 @@
 
 # Mobile Robot localisation Tutorial
 
+![Robot Simulation](tuto_images/localiz.png)
+
+
 Coming soon!
 
 ##License
