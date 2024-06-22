@@ -3,8 +3,7 @@
 
 ![Robot Simulation](tuto_images/localiz.png)
 
-
-Coming soon!
+This repository is an extension of the Mobile-robot-simulation-ROS repository, where we implemented a mobile robot simulation, calculated inverse kinematics and wheel odometry, and added an IMU plugin. Now, we use the data from the wheel odometry and IMU to fuse them using the UKF (robot_localization package) to achieve more precise localization of our robot.
 
 ##License
 
