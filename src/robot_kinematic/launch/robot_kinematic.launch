@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Include the robot_description launch file -->
+  <include file="$(find robot_description)/launch/robot_xacro.launch"/>
+
+  <!-- Load the robot parameters from YAML file -->
+  <rosparam command="load" file="$(find robot_description)/config/robot_params.yaml"/>
+
+  <!-- Start the Odometry node for base movement -->
+  <node name="Odometry_base" pkg="robot_kinematic" type="Odometry" output="screen"/>
+
+  <!-- Start the Inverse Kinematics node -->
+  <node name="InvKinematic" pkg="robot_kinematic" type="InvKinematic" output="screen"/>
+ 
+  <!-- Start the teleop_twist_keyboard node -->
+  <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"/>
+  
+  <!-- Start RViz with the saved configuration -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_kinematic)/rviz/config.rviz"/>
+ 
+
+</launch>
+

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<robot>
+
+    <gazebo reference="chassis">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="wheel1_link">
+        <mu1>10.0</mu1>
+        <mu2>5.0</mu2>
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="wheel2_link">
+        <mu1>10.0</mu1>
+        <mu2>5.0</mu2>
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="caster_wheel">
+        <mu1>0.001</mu1>
+        <mu2>0.001</mu2>
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+
+    <!-- Controller for wheels -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+          <robotNamespace>/robot</robotNamespace>
+          <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        </plugin>
+    </gazebo>
+
+    <!-- Getting the real position of the robot on Gazebo -->
+    <gazebo>
+        <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>50.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>ground_truth/state</topicName>
+            <gaussianNoise>0.0</gaussianNoise>
+            <frameName>world</frameName>
+            <xyzOffsets>0 0 0</xyzOffsets>
+            <rpyOffsets>0 0 0</rpyOffsets>
+        </plugin>
+    </gazebo>
+
+
+
+    <gazebo>
+        <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+            <alwaysOn>true</alwaysOn>
+            <bodyName>imu_link</bodyName>
+            <topicName>imu</topicName>
+            <serviceName>imu_service</serviceName>
+            <gaussianNoise>0.0</gaussianNoise>
+            <updateRate>100.0</updateRate>
+        </plugin>
+    </gazebo>
+
+</robot>

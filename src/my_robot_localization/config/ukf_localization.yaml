@@ -1,0 +1,93 @@
+frequency: 100  # Frequency of the EKF node
+#sensor_timeout: 0.1  # Maximum allowable time between sensor messages
+two_d_mode: true  # Set to true if your robot moves only in the x-y plane (2D)
+publish_tf: true
+
+#map_frame: map  # Frame for the map
+odom_frame: odom  # Frame for odometry
+base_link_frame: base_link  # Frame for the base link of the robot
+world_frame: odom  # Frame for the world (typically same as odom_frame)
+
+# Sensor sources
+imu0: /imu  # Topic for IMU data
+odom0: /wheel/odom  # Topic for encoder wheel odometry data
+
+# Sensor configurations
+odom0_config: [false, false, false,  # X, Y, Z  
+              false, false, false,   # Roll, pitch, yaw
+              true, true, true,     # Linear velocity
+              true, true, true,    # Angular velocity
+              false, false, false]   # Linear acceleration
+
+# if odom0_differential is set to true x, y and yaw will be differentiated to get vx, vy and vyaw              
+#odom0_differential: false
+odom0_relative: false
+
+              
+imu0_config: [false, false, false,
+              false, false, true,
+              false, false, false,
+              true, true, true,
+              true, true, true]
+
+#imu0_differential: false
+imu0_relative: false
+
+
+              
+# The process noise covariance matrix can be difficult to tune, and can vary for each application, so it
+# is exposed as a configuration parameter. The values are ordered as x, y, z, roll, pitch, yaw, vx, vy, vz,
+# vroll, vpitch, vyaw, ax, ay, az. Defaults to the matrix below if unspecified.
+process_noise_covariance: [0.05, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0.05, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0.06, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0.03, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0.03, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0.06, 0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0.025, 0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0.025, 0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0.04, 0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0.01, 0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0.01, 0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0.02, 0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0.01, 0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0.01, 0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0.015]
+                           
+                           
+                           
+
+ # This represents the initial value for the state estimate error covariance matrix. Setting a diagonal value (a
+# variance) to a large value will result in early measurements for that variable being accepted quickly. Users should
+# take care not to use large values for variables that will not be measured directly. The values are ordered as x, y,
+# z, roll, pitch, yaw, vx, vy, vz, vroll, vpitch, vyaw, ax, ay, az. Defaults to the matrix below if unspecified. -->                           
+initial_estimate_covariance: [1e-9, 0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    1e-9, 0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    1e-9, 0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    1e-9, 0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    1e-9, 0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    1e-9, 0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    1e-9, 0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    1e-9, 0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    1e-9, 0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    1e-9,  0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     1e-9,  0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     1e-9,  0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     1e-9, 0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    1e-9, 0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    1e-9]
+                              
+                              
+initial_state: [0.0,  0.0,  0.0,
+                0.0,  0.0,  0.0,
+                0.0,  0.0,  0.0,
+                0.0,  0.0,  0.0,
+                0.0,  0.0,  0.0]   
+
+
+# Output configurations
+#odom0_pose_rejection_threshold: 5.0
+#odom0_twist_rejection_threshold: 0.1
+#imu0_pose_rejection_threshold: 0.8
+#imu0_twist_rejection_threshold: 0.8
+

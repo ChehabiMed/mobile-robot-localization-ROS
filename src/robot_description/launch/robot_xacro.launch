@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Include the custom robot_control launch file -->
+    <include file="$(find robot_control)/launch/my_robot_control.launch"/>
+
+    <!-- Include Gazebo's empty_world launch file with specific arguments -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="paused" value="false" />
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+        <arg name="headless" value="false" />
+        <arg name="debug" value="false" />
+    </include>
+    
+    <!-- Load the robot description from URDF using xacro -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find robot_description)/urdf/robot.xacro'" />
+
+    <!-- Uncomment the following to start the robot state publisher -->
+    <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> -->
+
+    <!-- Spawn the robot model in Gazebo -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model robot -param robot_description" />
+
+</launch>
+

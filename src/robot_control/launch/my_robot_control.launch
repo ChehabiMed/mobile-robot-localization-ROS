@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load robot control parameters -->
+  <rosparam file="$(find robot_control)/config/robot_control.yaml" command="load"/>
+
+  <!-- Spawn controllers for the robot -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/robot" args="joint1_velocity_controller joint2_velocity_controller joint_state_controller"/>
+
+  <!-- Publish robot state -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/robot/joint_states" />
+  </node>
+
+</launch>
+

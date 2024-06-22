@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch> 
+
+    <!-- Include the robot_description launch file -->
+    <include file="$(find robot_kinematic)/launch/robot_kinematic.launch"/>
+
+    <!-- Run the UKF Localization node -->
+    <node pkg="robot_localization" type="ukf_localization_node" name="ukf_localization_node" clear_params="true">
+        <rosparam command="load" file="$(find my_robot_localization)/config/ukf_localization.yaml"/>
+    </node>
+
+</launch>
+

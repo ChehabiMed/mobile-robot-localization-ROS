@@ -1,0 +1,5 @@
+wheel_separation : 0.1515
+wheel_radius : 0.032
+wheel_length : 0.027
+motor_rate : 100
+buffer_size : 1
