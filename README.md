@@ -2,7 +2,7 @@
 # Mobile Robot localisation Tutorial
 
 ![Robot Simulation](tuto_images/localiz.png)
-In yellow the filtered trajectory, in red the wheel odometry trajectory.
+Yellow: the filtered trajectory. Red: the wheel odometry trajectory.
 
 This repository is an extension of the Mobile-robot-simulation-ROS repository, where we implemented a mobile robot simulation, calculated inverse kinematics and wheel odometry, and added an IMU plugin. Now, we use the data from the wheel odometry and IMU to fuse them using the UKF (robot_localization package) to achieve more precise localization of our robot.
 
