@@ -41,6 +41,9 @@ Launch the localization simulation environment:
 roslaunch my_robot_localization start_filter.launch 
 ```
 
+![rqt](tuto_images/ukf_rqt.png)
+
+
 ## Future Enhancements
 
 Future updates may include:
